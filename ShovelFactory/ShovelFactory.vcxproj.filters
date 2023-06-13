@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков\Shovel">
+      <UniqueIdentifier>{31f72e02-fd39-459e-8815-46987848922b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Storage">
+      <UniqueIdentifier>{df9cc817-51bd-4941-92de-85c91cd6aed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Shovel">
+      <UniqueIdentifier>{d3024ae5-9516-4306-a487-ddbc2f4fd664}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Storage">
+      <UniqueIdentifier>{6aab25a9-16c0-4bd1-8dd5-2597abf6840b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Provider">
+      <UniqueIdentifier>{fd4dd235-0825-43ed-940b-b4dd5ddf9b0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Provider">
+      <UniqueIdentifier>{5dbc7e95-8de1-4952-9ec4-2f69b709bad6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Utils">
+      <UniqueIdentifier>{ba4e8fc7-cd68-40fd-8e17-6b19004b2ec1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Utils">
+      <UniqueIdentifier>{73d34e36-b750-4c53-bece-1389d26c1af2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Task">
+      <UniqueIdentifier>{d31d9ec1-8ac3-49fb-990b-eab9cbef3ca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Task">
+      <UniqueIdentifier>{b4528204-1851-4ce2-94a4-e8d0d4ed6191}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ShovelPart.h">
+      <Filter>Файлы заголовков\Shovel</Filter>
+    </ClInclude>
+    <ClInclude Include="ShovelHandle.h">
+      <Filter>Файлы заголовков\Shovel</Filter>
+    </ClInclude>
+    <ClInclude Include="ShovelBlade.h">
+      <Filter>Файлы заголовков\Shovel</Filter>
+    </ClInclude>
+    <ClInclude Include="Storage.h">
+      <Filter>Файлы заголовков\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="ShovelFactory.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Provider.h">
+      <Filter>Файлы заголовков\Provider</Filter>
+    </ClInclude>
+    <ClInclude Include="Shovel.h">
+      <Filter>Файлы заголовков\Shovel</Filter>
+    </ClInclude>
+    <ClInclude Include="Assembler.h">
+      <Filter>Файлы заголовков\Provider</Filter>
+    </ClInclude>
+    <ClInclude Include="Seller.h">
+      <Filter>Файлы заголовков\Provider</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadPool.h">
+      <Filter>Файлы заголовков\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Файлы заголовков\Task</Filter>
+    </ClInclude>
+    <ClInclude Include="RequestShovelTask.h">
+      <Filter>Файлы заголовков\Task</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ShovelPart.cpp">
+      <Filter>Исходные файлы\Shovel</Filter>
+    </ClCompile>
+    <ClCompile Include="ShovelBlade.cpp">
+      <Filter>Исходные файлы\Shovel</Filter>
+    </ClCompile>
+    <ClCompile Include="ShovelHandle.cpp">
+      <Filter>Исходные файлы\Shovel</Filter>
+    </ClCompile>
+    <ClCompile Include="Storage.cpp">
+      <Filter>Исходные файлы\Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="ShovelFactory.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Provider.cpp">
+      <Filter>Исходные файлы\Provider</Filter>
+    </ClCompile>
+    <ClCompile Include="Shovel.cpp">
+      <Filter>Исходные файлы\Shovel</Filter>
+    </ClCompile>
+    <ClCompile Include="Assembler.cpp">
+      <Filter>Исходные файлы\Provider</Filter>
+    </ClCompile>
+    <ClCompile Include="Seller.cpp">
+      <Filter>Исходные файлы\Provider</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadPool.cpp">
+      <Filter>Исходные файлы\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
+      <Filter>Исходные файлы\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="RequestShovelTask.cpp">
+      <Filter>Исходные файлы\Task</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
