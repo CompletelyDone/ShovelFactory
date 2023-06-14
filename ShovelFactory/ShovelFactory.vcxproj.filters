@@ -43,6 +43,12 @@
     <Filter Include="Исходные файлы\Task">
       <UniqueIdentifier>{b4528204-1851-4ce2-94a4-e8d0d4ed6191}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Controller">
+      <UniqueIdentifier>{95edec00-0608-4fc7-8bff-c6e2f33487e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Controller">
+      <UniqueIdentifier>{a2c53869-8431-412c-8020-e31513fa8397}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShovelPart.h">
@@ -81,6 +87,9 @@
     <ClInclude Include="RequestShovelTask.h">
       <Filter>Файлы заголовков\Task</Filter>
     </ClInclude>
+    <ClInclude Include="ControllerShovelStorage.h">
+      <Filter>Файлы заголовков\Controller</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ShovelPart.cpp">
@@ -118,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="RequestShovelTask.cpp">
       <Filter>Исходные файлы\Task</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllerShovelStorage.cpp">
+      <Filter>Исходные файлы\Controller</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

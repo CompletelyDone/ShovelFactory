@@ -4,26 +4,26 @@
 #include <condition_variable>
 #include <thread>
 #include "Task.h"
+#include "RequestShovelTask.h"
 
 using namespace std;
 
+template<typename T>
 class ThreadPool
 {
 private:
 	int currentTaskId;
 	bool stop;
 
-
 	mutex taskMutex;
-
+	mutex taskCompletedMutex;
 
 	condition_variable cvTask;
-	condition_variable cvWaitTask;
-
+	condition_variable cvCompletedTask;
 
 	vector<int> completedTask;
 	vector<thread> threads;
-	vector<Task> tasks;
+	vector<T> tasks;
 
 	void TaskRun()
 	{
@@ -34,7 +34,7 @@ private:
 			{
 				cvTask.wait(lock);
 			}
-			auto newTask = move(tasks.back());
+			T newTask = move(tasks.back());
 			tasks.pop_back();
 			lock.unlock();
 			newTask.Execute();
@@ -50,41 +50,46 @@ public:
 			threads.emplace_back(&ThreadPool::TaskRun, this);
 		}
 	}
-	int AddTask(Task& task)
+	int AddTask(T& task)
 	{
 		lock_guard<mutex> lock(taskMutex);
 		int newId = ++currentTaskId;
 		task.id = newId;
 		tasks.push_back(task);
-		cvTask.notify_all();
+		cvTask.notify_one();
+		cvCompletedTask.notify_all();
 		return newId;
 	}
 	void Wait(const int taskId)
 	{
-		unique_lock<mutex> lock(taskMutex);
-		cvWaitTask.wait(lock, [this, taskId] {return stop || find(completedTask.begin(), completedTask.end(), taskId) != completedTask.end(); });
-		cvWaitTask.notify_all();
+		unique_lock<mutex> lock(taskCompletedMutex);
+		cvCompletedTask.wait(lock, [this, taskId] {return stop || find(completedTask.begin(), completedTask.end(), taskId) != completedTask.end(); });
+		cvCompletedTask.notify_all();
 		lock.unlock();
 	}
 	void WaitAll()
 	{
-		unique_lock<mutex> lock(taskMutex);
-		cvWaitTask.wait(lock, [this] {return stop || tasks.size() == currentTaskId; });
+		unique_lock<mutex> lock(taskCompletedMutex);
+		cvCompletedTask.wait(lock, [this] {return stop || tasks.size() == currentTaskId; });
 		cvTask.notify_all();
 		lock.unlock();
 	}
 	bool IsCalculated(int taskId)
 	{
-		lock_guard<mutex> lock(taskMutex);
+		lock_guard<mutex> lock(taskCompletedMutex);
 		bool result = find(completedTask.begin(), completedTask.end(), taskId) != completedTask.end();
 		cvTask.notify_all();
 		return result;
 	}
 	void Shutdown()
 	{
-		lock_guard<std::mutex> lock(taskMutex);
+		unique_lock<std::mutex> lockTask(taskMutex, defer_lock);
+		unique_lock<std::mutex> lockCompletedTask(taskCompletedMutex, defer_lock);
+		lock(lockTask, lockCompletedTask);
 		stop = true;
 		cvTask.notify_all();
+		lockTask.unlock();
+		lockCompletedTask.unlock();
 		for (auto& thread : threads) 
 		{
 			thread.join();

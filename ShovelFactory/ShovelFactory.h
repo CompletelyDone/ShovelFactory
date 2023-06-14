@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ThreadPool.h"
 #include "Storage.h"
 #include "Provider.h"
 #include "Assembler.h"
@@ -49,10 +50,13 @@ int main()
 		Seller seller(storageShovel, sellerSpeed);
 		seller.StartWork();
 	}
-	
+	ThreadPool<RequestShovelTask> ZaVOd(4);
+	for (size_t i = 0; i < 20; i++)
+	{
+		RequestShovelTask newTask;
+		ZaVOd.AddTask(newTask);
+	}
 
-	
-	
 
 	while (true)
 	{

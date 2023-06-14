@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Assembler.h" />
+    <ClInclude Include="ControllerShovelStorage.h" />
     <ClInclude Include="Provider.h" />
     <ClInclude Include="RequestShovelTask.h" />
     <ClInclude Include="Seller.h" />
@@ -142,6 +143,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Assembler.cpp" />
+    <ClCompile Include="ControllerShovelStorage.cpp" />
     <ClCompile Include="Provider.cpp" />
     <ClCompile Include="RequestShovelTask.cpp" />
     <ClCompile Include="Seller.cpp" />
