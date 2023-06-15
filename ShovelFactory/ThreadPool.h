@@ -36,9 +36,13 @@ private:
 			}
 			T newTask = move(tasks.back());
 			tasks.pop_back();
+			cvTask.notify_all();
+			taskIsEmpty.notify_one();
 			lock.unlock();
 			newTask.Execute();
+			lock_guard<mutex> lockCompletedTask(taskCompletedMutex);
 			completedTask.push_back(newTask.id);
+			cvCompletedTask.notify_all();
 		}
 	}
 public:
@@ -83,8 +87,8 @@ public:
 	}
 	void Shutdown()
 	{
-		unique_lock<std::mutex> lockTask(taskMutex, defer_lock);
-		unique_lock<std::mutex> lockCompletedTask(taskCompletedMutex, defer_lock);
+		unique_lock<mutex> lockTask(taskMutex, defer_lock);
+		unique_lock<mutex> lockCompletedTask(taskCompletedMutex, defer_lock);
 		lock(lockTask, lockCompletedTask);
 		stop = true;
 		cvTask.notify_all();
@@ -94,6 +98,19 @@ public:
 		{
 			thread.join();
 		}
+	}
+	int TotalCompletedTasks()
+	{
+		lock_guard<mutex> lockCompletedTask(taskCompletedMutex);
+		int tmp = completedTask.size();
+		return tmp;
+	}
+
+	condition_variable taskIsEmpty;
+	bool IsEmpty()
+	{
+		lock_guard<mutex> lockTask(taskMutex);
+		return tasks.empty();
 	}
 };
 

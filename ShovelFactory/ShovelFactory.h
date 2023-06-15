@@ -8,20 +8,21 @@
 #include "Shovel.h"
 #include "ShovelBlade.h"
 #include "ShovelHandle.h"
+#include "ControllerShovelStorage.h"
 
 #define storageBladeCount 70
 #define storageHandleCount 45
 #define storageShovelCount 10
 
-#define providerBladeSpeed 350
-#define providerHandleSpeed 100
+#define providerBladeSpeed 1350
+#define providerHandleSpeed 1000
 #define assemblerSpeed 1500
 #define sellerSpeed 3000
 
 #define providerBladeCount 2
 #define providerHandleCount 2
 #define assemblerCount 2
-#define sellerCount 3
+#define sellerCount 1
 
 int main()
 {
@@ -40,29 +41,28 @@ int main()
 		Provider<ShovelHandle> providerShovelHandle(storageHandle, providerHandleSpeed);
 		providerShovelHandle.StartWork();
 	}
-	for (size_t i = 0; i < assemblerCount; i++)
+	/*for (size_t i = 0; i < assemblerCount; i++)
 	{
 		Assembler assembler(storageShovel, storageBlade, storageHandle, assemblerSpeed);
 		assembler.StartWork();
-	}
+	}*/
 	for (size_t i = 0; i < sellerCount; i++)
 	{
 		Seller seller(storageShovel, sellerSpeed);
 		seller.StartWork();
 	}
 	ThreadPool<RequestShovelTask> ZaVOd(4);
-	for (size_t i = 0; i < 20; i++)
-	{
-		RequestShovelTask newTask;
-		ZaVOd.AddTask(newTask);
-	}
 
+	ControllerShovelStorage controller(ZaVOd, storageShovel, storageBlade, storageHandle, 1000);
+	controller.StartWork();
 
 	while (true)
 	{
 		cout << "Blade storage: " << storageBlade.Count() << endl;
 		cout << "Handle storage: " << storageHandle.Count() << endl;
 		cout << "Shovel storage: " << storageShovel.Count() << endl;
+
+		cout << "Completed task count: " << ZaVOd.TotalCompletedTasks() << endl;
 
 		this_thread::sleep_for(chrono::milliseconds(500));
 	}

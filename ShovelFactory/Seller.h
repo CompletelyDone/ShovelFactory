@@ -19,7 +19,6 @@ private:
 	mutex sellerMutex;
 	thread sellerThread;
 	condition_variable cvSeller;
-
 public:
 	Seller(Storage<Shovel>& _storage, int _speed) : storage(_storage), speed(_speed), stop(true) {}
 	void StartWork()
@@ -45,7 +44,7 @@ public:
 						}
 						out.close();
 					}
-					cvSeller.notify_one();
+					cvSeller.notify_all();
 					lockSeller.unlock();
 
 					this_thread::sleep_for(chrono::milliseconds(speed));

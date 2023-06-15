@@ -4,6 +4,7 @@
 #include <vector>
 #include <exception>
 #include "ShovelPart.h"
+#include "Shovel.h"
 
 using namespace std;
 
@@ -17,8 +18,10 @@ private:
 	condition_variable cvStorage;
 public:
 	mutex storageMutex;
+	condition_variable cvStorageIsEmpty;
 	condition_variable cvStorageNotEmpty;
 	condition_variable cvStorageNotFull;
+	condition_variable cvStorageShovelLeft;
 	Storage(int _capacity) : capacity(_capacity) {}
 	size_t Count()
 	{
@@ -60,7 +63,9 @@ public:
 		}
 		T item = items.back();
 		items.pop_back();
+		cvStorageShovelLeft.notify_all();
 		cvStorageNotFull.notify_all();
+		cvStorageIsEmpty.notify_all();
 		lock.unlock();
 		return item;
 	}

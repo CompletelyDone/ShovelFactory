@@ -4,7 +4,7 @@ class Task
 {
 private:
 public:
-	int id;
+	int id = 0;
 	virtual void Execute() = 0;
 	virtual ~Task() {}
 };

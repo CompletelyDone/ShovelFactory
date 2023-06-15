@@ -42,7 +42,6 @@ public:
 			}
 		);
 		newThread.detach();
-
 	}
 
 	void StopWork()
