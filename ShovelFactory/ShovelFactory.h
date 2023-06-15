@@ -18,11 +18,13 @@
 #define providerHandleSpeed 1000
 #define assemblerSpeed 1500
 #define sellerSpeed 3000
+#define controllerSpeed 1000
 
 #define providerBladeCount 2
 #define providerHandleCount 2
 #define assemblerCount 2
 #define sellerCount 1
+#define ZaVOdWorkerCount 4
 
 int main()
 {
@@ -51,9 +53,9 @@ int main()
 		Seller seller(storageShovel, sellerSpeed);
 		seller.StartWork();
 	}
-	ThreadPool<RequestShovelTask> ZaVOd(4);
+	ThreadPool<RequestShovelTask> ZaVOd(ZaVOdWorkerCount);
 
-	ControllerShovelStorage controller(ZaVOd, storageShovel, storageBlade, storageHandle, 1000);
+	ControllerShovelStorage controller(ZaVOd, storageShovel, storageBlade, storageHandle, controllerSpeed);
 	controller.StartWork();
 
 	while (true)
